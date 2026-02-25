@@ -2,7 +2,9 @@ import axios from 'axios';
 import type { Note } from '../types/Note';
 import { ApiError } from '../types/ApiError';
 
-const API_URL = 'https://localhost:7078/notes';
+// const API_URL = 'https://localhost:7078/notes';
+const API_URL = 'https://notenest-api-773165564331.europe-southwest1.run.app/';
+
 
 function handleError(error: any):never {
     if (error.response) {
