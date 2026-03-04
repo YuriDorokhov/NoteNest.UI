@@ -1,10 +1,10 @@
 import axios from 'axios';
-import type { Note } from '../types/Note';
+import type { Category } from '../types/Category';
 import { ApiError } from '../types/ApiError';
 
 // const API_URL = 'https://localhost:7078';
 const API_URL = 'https://note-nest-api-773165564331.europe-southwest1.run.app';
-const NOTES_API_URL = API_URL + '/notes';
+const CATEGORIES_API_URL = API_URL + '/Categories';
 
 function handleError(error: any):never {
     if (error.response) {
@@ -23,48 +23,47 @@ function handleError(error: any):never {
     throw new ApiError("NETWORK_ERROR");
 }
 
-export const getNotes = async () => {
+export const getCategories = async () => {
     try {
-        const response = await axios.get<Note[]>(NOTES_API_URL);
+        const response = await axios.get<Category[]>(CATEGORIES_API_URL);
         return response.data;
     } catch (error: any) {
         handleError(error);
     }
 };
 
-export const getNote = async (id: string) => {
+export const getCategory = async (id: string) => {
     try {
-        const response = await axios.get<Note>(`${NOTES_API_URL}/${id}`);
+        const response = await axios.get<Category>(`${CATEGORIES_API_URL}/${id}`);
         return response.data;
     } catch (error: any) {
         handleError(error);
     }
 };
 
-export const createNote = async (note: Omit<Note, 'id' | 'createdDate' | 'lastModifiedDate'>) => {
+export const createCategory = async (category: Category) => {
     try {
-        const response = await axios.post<Note>(NOTES_API_URL, note);
+        const response = await axios.post<Category>(CATEGORIES_API_URL, category);
         return response.data;
     } catch (error: any) {
         handleError(error);
     }
 };
 
-export const updateNote = async (
-    id: string,
-    note: Partial<Omit<Note, 'id' | 'createdDate' | 'lastModifiedDate'>>
+export const updateCategory = async (
+    category: Category
 ) => {
     try {
-        const response = await axios.put<Note>(`${NOTES_API_URL}/${id}`, note);
+        const response = await axios.put<Category>(`${CATEGORIES_API_URL}/${category.id}`, category);
         return response.data;
     } catch (error: any) {
         handleError(error);
     }
 };
 
-export const deleteNote = async (id: string) => {
+export const deleteCategory = async (id: string) => {
     try {
-        const response = await axios.delete(`${NOTES_API_URL}/${id}`);
+        const response = await axios.delete(`${CATEGORIES_API_URL}/${id}`);
         return response.data;
     } catch (error: any) {
         handleError(error);

@@ -1,12 +1,14 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-
-const repoName = 'NoteNest.UI'
+import tailwindcss from '@tailwindcss/vite'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: `/${repoName}/`,
-  plugins: [react()],
+  base: `/NoteNest.UI/`,
+  plugins: [
+    react(),
+    tailwindcss(),
+  ],
   server: {
     host: '0.0.0.0', // important if you want external access (ngrok, LAN)
   port: 5173,
