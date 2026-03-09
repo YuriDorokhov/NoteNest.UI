@@ -2,9 +2,8 @@ import axios from 'axios';
 import type { NoteCard } from '../types/NoteCard';
 import type { TranslateNoteCardRequest } from '../types/TranslateNoteCardRequest';
 import { ApiError } from '../types/ApiError';
+import { API_URL } from '../services/serviceConfigs';
 
-// const API_URL = 'https://localhost:7078';
-const API_URL = 'https://note-nest-api-773165564331.europe-southwest1.run.app';
 const NOTECARDS_API_URL = API_URL + '/NoteCards';
 
 function handleError(error: any):never {

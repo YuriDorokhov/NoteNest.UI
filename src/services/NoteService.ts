@@ -1,9 +1,8 @@
 import axios from 'axios';
 import type { Note } from '../types/Note';
 import { ApiError } from '../types/ApiError';
+import { API_URL } from '../services/serviceConfigs';
 
-// const API_URL = 'https://localhost:7078';
-const API_URL = 'https://note-nest-api-773165564331.europe-southwest1.run.app';
 const NOTES_API_URL = API_URL + '/notes';
 
 function handleError(error: any):never {

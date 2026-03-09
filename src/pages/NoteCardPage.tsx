@@ -20,6 +20,8 @@ const NoteCardPage: React.FC = () => {
     const [categoryCollapsed, setCategoryCollapsed] = useState(false);
 
     const textRef = useRef<HTMLTextAreaElement>(null);
+    const selectedCategory = categories.find(
+        (c) => c.id === noteCard.categoryId);
 
     // Load categories
     const loadCategories = async () => {
@@ -39,15 +41,27 @@ const NoteCardPage: React.FC = () => {
     const handleTranslate = async () => {
         if (!noteCard.text.trim()) return;
 
+        if (!selectedCategory) {
+            alert("Please select a category before translating");
+            return;
+        }
+
         try {
             setLoading(true);
+
             const req: TranslateNoteCardRequest = {
                 noteCard: noteCard,
-                sourceLanguage: "en",
-                targetLanguage: "ru"
+                sourceLanguage: selectedCategory.sourceLanguage,
+                targetLanguage: selectedCategory.targetLanguage
             };
+
             const translatedNoteCard = await translateNoteCard(req);
-            setNoteCard((prev) => ({ ...prev, translatedText: translatedNoteCard.translatedText }));
+
+            setNoteCard((prev) => ({
+                ...prev,
+                translatedText: translatedNoteCard.translatedText
+            }));
+
         } catch (error) {
             console.error("Translation failed", error);
         } finally {
@@ -133,7 +147,7 @@ const NoteCardPage: React.FC = () => {
                     </button>
                 </div>
 
-                
+
 
                 {/* Collapsible Category Section */}
                 <div className="mt-3 border rounded p-2">
